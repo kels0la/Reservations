@@ -39,10 +39,6 @@ app.get("/tables", function(req, res) {
     res.sendFile(path.join(__dirname, "public/tables.html"));
 });
 
-app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "public/home.html"));
-});
-
 // API Routes
 app.post('/api/reserve', function(req, res) {
     let reservation = req.body
@@ -66,6 +62,9 @@ app.get('/api/waitlist', function(req, res) {
     res.json(waitlist)
 })
 
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/home.html"));
+});
 
 
 
