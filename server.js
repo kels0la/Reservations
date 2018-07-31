@@ -39,10 +39,6 @@ app.get("/tables", function(req, res) {
     res.sendFile(path.join(__dirname, "public/tables.html"));
 });
 
-app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "public/home.html"));
-});
-
 // API Routes
 app.post('/api/reserve', function(req, res) {
     let reservation = req.body
@@ -79,6 +75,9 @@ app.delete('/api/tables/:id', function(req, res) {
 app.delete('/api/waitlist/:id', function(req, res) {
     res.json(deleteReservation(req.params.id, waitlist))
 })
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/home.html"));
+});
 
 function deleteReservation(id, arr) {
     let index;

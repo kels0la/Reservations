@@ -48,7 +48,7 @@
                             <div class="panel-body" id="tableSection">
                                 
                                 <div class="well" id="tableWell-01">
-                                    <h2><span class="label label-primary">1</span> | afhaque89</h2>
+                                    <!-- <h2><span class="label label-primary">1</span> | afhaque89</h2> -->
                                 </div>
 
                             </div>
@@ -64,7 +64,7 @@
                             <div class="panel-body" id="waitlistSection">
 
                                 <div class="well" id="waitlistWell-01">
-                                    <h2><span class="label label-primary">1</span> | saimacool</h2>
+                                    <!-- <h2><span class="label label-primary">1</span> | saimacool</h2> -->
                                 </div>
 
                             </div>
@@ -74,7 +74,27 @@
             </div>
 
 
-    <script src="assets/javascript/server.js"></script>
+    <script>
+    $.get("/api/tables", function(data){
+        console.log(data);
+        var table = $("<h2>");
+
+        for (i=0; i < data.length; i++){
+            var name = data[i].name;
+            var phone = data[i].phone;
+            var email = data[i].email;
+            var tabSpan = $("<span>");
+            tabSpan.addClass("label label-primary row");
+            tabSpan.append(parseInt(i) + 1);
+            tabSpan.append(" | " + name)
+
+            table.append(tabSpan);
+        };
+        $("#tableSection").append(table)
+        
+    })
+    
+    </script>
 
 </body>
 </html>
