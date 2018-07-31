@@ -14,18 +14,15 @@ var PORT = 3000;
 // Routes
 // ===========================================================
 app.get("/", function(req, res) {
-    // res.send("Welcome to the Star Wars Page!")
-    res.sendFile(path.join(__dirname, "home.html"));
+    res.sendFile(path.join(__dirname, "public/home.html"));
 });
 
 app.get("/reserve", function(req, res) {
-    // res.send("Welcome to the Star Wars Page!")
-    res.sendFile(path.join(__dirname, "reserve.html"));
+    res.sendFile(path.join(__dirname, "public/reserve.html"));
 });
 
 app.get("/tables", function(req, res) {
-    // res.send("Welcome to the Star Wars Page!")
-    res.sendFile(path.join(__dirname, "tables.html"));
+    res.sendFile(path.join(__dirname, "public/tables.html"));
 });
 
 
