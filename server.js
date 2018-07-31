@@ -66,7 +66,35 @@ app.get('/api/waitlist', function(req, res) {
     res.json(waitlist)
 })
 
+app.delete('/api/tables/:id', function(req, res) {
+    deletedReservation = deleteReservation(req.params.id, reservations);
+    if(deleteReservation) {
+        let firstOnWaitlist = waitlist.shift()
+        reservations.push(firstOnWaitlist)
+    }
 
+    res.json(deleteReservation)
+})
+
+app.delete('/api/waitlist/:id', function(req, res) {
+    res.json(deleteReservation(req.params.id, waitlist))
+})
+
+function deleteReservation(id, arr) {
+    let index;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id === id) {
+            index = i
+            break;
+        }
+    }
+
+    if (index) {
+        return arr.splice(index, 1)
+    } else {
+        return false
+    }
+}
 
 
 // Listener
