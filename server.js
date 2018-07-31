@@ -42,6 +42,12 @@ app.get("/tables", function(req, res) {
 // API Routes
 app.post('/api/reserve', function(req, res) {
     let reservation = req.body
+    if (reservations.some(r => r.id === reservation.id) ||
+        waitlist.some(r => r.id === reservation.id)) {
+        res.status(400)
+        res.send('ID is not unique.')
+        return
+    }
 
     if (reservations.length < 5 ) {
         reservations.push(reservation)
