@@ -1,80 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Reservations</title>
-  <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
 
-
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-        <div class="container">
-                <div class="jumbotron">
-                    <h1 class="text-center">
-                            <i class="fas fa-glass-martini-alt"></i>
-                             Martini Lounge</h1>
-                    <hr>
-                    <h2 class="text-center">
-                        Make your reservation
-                    </h2>
-                    <br>
-                    <div class="text-center">
-                        <a href="/reserve" class="btn btn-primary btn-lg">
-                            <span class="glyphicon glyphicon-list-alt"></span> View Tables
-                        </a>
-                        <a href="/home" class="btn btn-light btn-lg btn-default">
-                            <i class="fas fa-home"></i>
-                        </a>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">
+                <i class="fas fa-glass-martini-alt"></i>
+                Martini Lounge</h1>
+            <hr>
+            <h2 class="text-center">
+                Make Reservations
+            </h2>
+            <br>
+            <div class="text-center">
+                <a href="/tables" class="btn btn-danger btn-lg">
+                    <span class="glyphicon glyphicon-list-alt"></span> View Tables
+                </a>
+                <a href="/" class="btn btn-primary btn-lg btn-default">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Table Reservation</h4>
                     </div>
-        
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <div class ="panel panel-default">
-
-                            <div class="panel-heading">
-                                <h4 class="panel-title">Current Reservations</h4>
+                    <div class="panel-body">
+                        <form role="form" id="reservation">
+                            <div class="form-group">
+                                <label for="reserve-name">Name</label>
+                                <input type="text" class="form-control" id="reserve-name">
                             </div>
-
-                            <div class="panel-body" id="tableSection">
-                                
-                                <div class="well" id="tableWell-01">
-                                    <h2><span class="label label-primary">1</span> | afhaque89</h2>
-                                </div>
-
+                            <div class="form-group">
+                                <label for="reserve-name">Phone Number</label>
+                                <input type="text" class="form-control" id="reserve-phone">
                             </div>
-                            
-                        </div>
-
-                        <div class="panel panel-default">
-                            
-                            <div class="panel-heading">
-                                <h4 class="panel-title">Waiting List</h4>
+                            <div class="form-group">
+                                <label for="reserve-name">Email</label>
+                                <input type="text" class="form-control" id="reserve-email">
                             </div>
-
-                            <div class="panel-body" id="waitlistSection">
-
-                                <div class="well" id="waitlistWell-01">
-                                    <h2><span class="label label-primary">1</span> | saimacool</h2>
-                                </div>
-
-                            </div>
-                        </div>
+                            <!-- <div class="form-group">
+                                <label for="reserve-name">Unique ID</label>
+                                <input type="text" class="form-control" id="reserve-unique-id">
+                            </div> -->
+                            <button type="submit" class="btn btn-primary submit" id="reserveSubmit">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <script>
+        $("#reserveSubmit").on("click", function () {
+            event.preventDefault();
+            var reservationData = {
+                name: $("#reserve-name").val().trim(),
+                phoneNumber: $("#reserve-phone").val().trim(),
+                email: $("#reserve-email").val().trim(),
+                // id: $("#name").val().trim(),
+            }
+            $.post("/api/reserve", reservationData)
+                .then(function (data) {
+                    console.log("Reserve data = " + data)
+            });
+            $("#reservation")[0].reset();
+        });
+    </script>
 
 
-    <script src="assets/javascript/server.js"></script>
 
 </body>
+
 </html>
