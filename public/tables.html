@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <title>Reservations</title>
   <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="assets/css/style.css">
 
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -47,10 +46,6 @@
 
                             <div class="panel-body" id="tableSection">
                                 
-                                <div class="well" id="tableWell-01">
-                                    <!-- <h2><span class="label label-primary">1</span> | afhaque89</h2> -->
-                                </div>
-
                             </div>
                             
                         </div>
@@ -83,10 +78,10 @@
             var name = data[i].name;
             var phone = data[i].phone;
             var email = data[i].email;
-            var tabSpan = $("<span>");
-            tabSpan.addClass("label label-primary row");
+            var tabSpan = $("<div>");
             tabSpan.append(parseInt(i) + 1);
             tabSpan.append(" | " + name)
+           
 
             table.append(tabSpan);
         };
