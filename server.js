@@ -2,16 +2,28 @@
 // ===========================================================
 const express = require("express");
 const path = require('path');
+const bodyParser = require('body-parser')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Data
 // ===========================================================
 let reservations = [];
 let waitlist = [];
 
+let fakeReservation = {
+    name: 'Joe',
+    phone: '55555555',
+    email: 'thing@thing.com',
+    id: 'joe555'
+}
 
+reservations.push(fakeReservation)
+waitlist.push(fakeReservation)
 
 // Routes
 // ===========================================================
@@ -29,19 +41,24 @@ app.get("/tables", function(req, res) {
 
 // API Routes
 app.post('/api/reserve', function(req, res) {
-    // send back conrimation?
+    let reservation = req.body
+
+    if (reservations.length < 5 ) {
+        reservations.push(reservation)
+    } else {
+        waitlist.push(reservation)
+    }
+
     console.log('reservation received');
-    // if (reservations.length < 5) { add to reservations}
-    // else add to waitlist
+    res.json({done: true})
 })
 
-app.get('/api/table', function(req, res) {
-    // return an array of all reservations
-    // send back json of reservations
+app.get('/api/tables', function(req, res) {
+    res.json(reservations)
 })
 
 app.get('/api/waitlist', function(req, res) {
-    // send back json of waitlist
+    res.json(waitlist)
 })
 
 
