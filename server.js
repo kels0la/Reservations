@@ -45,12 +45,13 @@ app.post('/api/reserve', function(req, res) {
 
     if (reservations.length < 5 ) {
         reservations.push(reservation)
+        res.json({hasReservation: true})
     } else {
         waitlist.push(reservation)
+        res.json({hasReservation: false})
     }
 
     console.log('reservation received');
-    res.json({done: true})
 })
 
 app.get('/api/tables', function(req, res) {
